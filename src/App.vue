@@ -1,20 +1,5 @@
 <template>
-  <router-view></router-view>
-  <base-search></base-search>
-  <base-list v-if="!filteredUsers.length">
-    <base-card
-      v-for="user in users"
-      :id="user.id"
-      :key="user.name"
-      :name="user.name"
-      :phone="user.phone"
-      :email="user.email"
-      :hireDate="user.hireDate"
-      :positionName="user.positionName"
-      :department="user.department"
-      :address="user.address"
-    ></base-card>
-  </base-list>
+  <base-search @userInput="loadInput"></base-search>
   <base-list>
     <base-card
       v-for="user in filteredUsers"
@@ -42,7 +27,7 @@ export default {
     return {
       users: [],
       error: null,
-      searchValue: '',
+      searchInput: '',
     };
   },
   methods: {
@@ -76,9 +61,26 @@ export default {
           this.error = 'Failed to fetch data, please try again later';
         });
     },
+
+    loadInput(data) {
+      this.searchInput = data;
+    },
+  },
+  // watch: {
+  //   filteredUsers() {
+  //     const filt = this.users.filter((user) => {
+  //       console.log(user.name);
+  //       user.name.toLowerCase().includes(this.$route.query.term.toLowerCase());
+  //       console.log(filt);
+  //     });
+  //   },
+  // },
+  computed: {
     filteredUsers() {
       return this.users.filter((user) => {
-        user.name.toLowerCase().includes(this.$router.query.term.toLowerCase());
+        return (
+          user.name.toLowerCase().indexOf(this.searchInput.toLowerCase()) !== -1
+        );
       });
     },
   },

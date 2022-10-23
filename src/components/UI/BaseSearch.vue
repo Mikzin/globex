@@ -8,7 +8,12 @@
         class="input__field"
         v-model="userInput"
       />
-      <button type="submit" value="" class="input__button" @click.prevent="set">
+      <button
+        type="submit"
+        value=""
+        class="input__button"
+        @click.prevent="translateInput"
+      >
         <ion-icon
           name="search-outline"
           class="input__button-icon icon"
@@ -20,29 +25,22 @@
 
 <script>
 export default {
-  data() {
-    return {
-      // userInput: '',
-    };
+  methods: {
+    translateInput() {
+      this.$emit('userInput', this.userInput);
+    },
   },
-  // methods: {
-  //   getInput() {
-  //     this.$router.push({ query: { term: this.userInput } });
-  //     console.log(this.$router.query.term);
-  //   },
-  // },
   computed: {
     userInput: {
       get() {
         return this.$route.query.term;
       },
       set(value) {
-        this.$router.replace({
+        this.$router.push({
           query: {
             term: value,
           },
         });
-        console.log(this.$router.params);
       },
     },
   },

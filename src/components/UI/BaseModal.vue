@@ -3,7 +3,6 @@
     <div class="modal" @click.self.stop="$emit('open')">
       <div class="modal__container">
         <button class="button-close" @click="$emit('open')"></button>
-        <!-- <ion-icon name="close-outline" class="button-close"></ion-icon> -->
         <h2 class="modal__name">{{ userName }}</h2>
         <div class="modal__info">
           <ul class="modal__key">

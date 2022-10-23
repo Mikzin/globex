@@ -53,7 +53,6 @@ export default {
             });
           }
           this.users = usersArray;
-          console.log(this.users);
         })
         .catch((err) => {
           console.log(err);
@@ -66,15 +65,6 @@ export default {
       this.searchInput = data;
     },
   },
-  // watch: {
-  //   filteredUsers() {
-  //     const filt = this.users.filter((user) => {
-  //       console.log(user.name);
-  //       user.name.toLowerCase().includes(this.$route.query.term.toLowerCase());
-  //       console.log(filt);
-  //     });
-  //   },
-  // },
   computed: {
     filteredUsers() {
       return this.users.filter((user) => {
